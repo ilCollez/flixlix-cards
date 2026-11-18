@@ -146,6 +146,7 @@
     "state_of_charge_unit_white_space": "Пробел",
     "state_type": "Тип состояния",
     "subtract_individual": "Вычесть индивидуально",
+    "individual_share": "Распределение по устройствам",
     "sum_total": "Суммировать солнечную и вторичную",
     "sum_total_individual": "Суммировать устройство и вторичную",
     "tap_action": "действие касания",

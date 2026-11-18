@@ -146,6 +146,7 @@
     "state_of_charge_unit_white_space": "Mezera u jednotky",
     "state_type": "Typ stavu",
     "subtract_individual": "Odečíst individuální zařízení",
+    "individual_share": "Rozdělení jednotlivých zařízení",
     "sum_total": "Sečíst solární a sekundární",
     "sum_total_individual": "Sečíst zařízení a sekundární",
     "tap_action": "Akce po klepnutí",

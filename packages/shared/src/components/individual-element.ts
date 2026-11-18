@@ -7,6 +7,7 @@ import {
 import { html, nothing, type TemplateResult } from "lit";
 import { type FlowLine } from "./flows/geometry";
 import { flowDot } from "./flow-dot";
+import { ringSections } from "./ring-sections";
 import { spacer } from "./spacer";
 import { type IndividualKey, individualSecondarySpan } from "./spans/individual-secondary-span";
 
@@ -47,7 +48,7 @@ export const deviceCircle = (
 ) => {
   const disableEntityClick = !config.clickable_entities;
   return html`<div
-    class="circle ${disableEntityClick ? "pointer-events-none" : ""}"
+    class="circle ${node.ring ? "ringed" : ""} ${disableEntityClick ? "pointer-events-none" : ""}"
     tabindex=${disableEntityClick ? nothing : 0}
     role=${disableEntityClick ? nothing : "button"}
     @click=${(e: MouseEvent) => {
@@ -81,6 +82,7 @@ export const deviceCircle = (
           </span>`
         : nothing
     }
+    ${node.ring ? ringSections(node.ring) : nothing}
   </div>`;
 };
 

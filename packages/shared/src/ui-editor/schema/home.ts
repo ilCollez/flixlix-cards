@@ -49,6 +49,16 @@ const mainSchema = {
       selector: { boolean: {} },
     },
     {
+      name: "individual_share",
+      label: "Individual Share",
+      selector: {
+        select: {
+          options: [{ value: "home_first", label: "Home first" }],
+          mode: "dropdown",
+        },
+      },
+    },
+    {
       name: "override_state",
       label: "Override State (With Home Entity)",
       selector: { boolean: {} },

@@ -768,6 +768,12 @@ const HOME_OPTIONS: OptionRow[] = [
     description: "Subtract individual devices from the home consumption value.",
   },
   {
+    name: "individual_share",
+    type: "'home_first'",
+    description:
+      "Home ring shows only the home's own loads, which take each source first; each individual device gets a ring of what is left.",
+  },
+  {
     name: "override_state",
     type: "boolean",
     default: "false",

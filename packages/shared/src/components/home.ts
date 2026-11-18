@@ -1,11 +1,11 @@
 import { type HomeRing } from "@flixlix-cards/shared/card-state";
-import { CIRCLE_CIRCUMFERENCE } from "@flixlix-cards/shared/const/circle";
 import {
   type CardMainContext,
   type FlowCardPlusConfig,
   type HomeObject,
 } from "@flixlix-cards/shared/types";
-import { html, nothing, svg } from "lit";
+import { html, nothing } from "lit";
+import { ringSections } from "./ring-sections";
 import { generalSecondarySpan } from "./spans/general-secondary-span";
 
 export const homeElement = (
@@ -55,48 +55,7 @@ export const homeElement = (
         ${generalSecondarySpan(main, home.secondary, "home")}
         ${home.icon !== " " ? html`<ha-icon id="home-icon" .icon=${home.icon}></ha-icon>` : nothing}
         <span class="home">${ring.usageText}</span>
-        <svg class="home-circle-sections">
-          <circle
-            class="solar"
-            cx="40"
-            cy="40"
-            r="38"
-            stroke-dasharray="${ring.solar} ${CIRCLE_CIRCUMFERENCE - ring.solar}"
-            shape-rendering="geometricPrecision"
-            stroke-dashoffset="-${CIRCLE_CIRCUMFERENCE - ring.solar}"
-          />
-          ${
-            ring.battery
-              ? svg`<circle
-                  class="battery"
-                  cx="40"
-                  cy="40"
-                  r="38"
-                  stroke-dasharray="${ring.battery} ${CIRCLE_CIRCUMFERENCE - ring.battery}"
-                  stroke-dashoffset="-${CIRCLE_CIRCUMFERENCE - ring.battery - ring.solar}"
-                  shape-rendering="geometricPrecision"
-                />`
-              : nothing
-          }
-          <circle
-            class="low-carbon"
-            cx="40"
-            cy="40"
-            r="38"
-            stroke-dasharray="${ring.nonFossil} ${CIRCLE_CIRCUMFERENCE - ring.nonFossil}"
-            stroke-dashoffset="-${CIRCLE_CIRCUMFERENCE - ring.nonFossil - ring.battery - ring.solar}"
-            shape-rendering="geometricPrecision"
-          />
-          <circle
-            class="grid"
-            cx="40"
-            cy="40"
-            r="38"
-            stroke-dasharray="${ring.grid} ${CIRCLE_CIRCUMFERENCE - ring.grid}"
-            stroke-dashoffset="0"
-            shape-rendering="geometricPrecision"
-          />
-        </svg>
+        ${ringSections(ring)}
       </div>
       ${
         !showLabel

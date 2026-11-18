@@ -146,6 +146,7 @@
     "state_of_charge_unit_white_space": "White Space",
     "state_type": "Type of State",
     "subtract_individual": "Subtract Individual",
+    "individual_share": "Individual Share",
     "sum_total": "Sum solar and secondary",
     "sum_total_individual": "Sum device and secondary",
     "tap_action": "Tap Action",

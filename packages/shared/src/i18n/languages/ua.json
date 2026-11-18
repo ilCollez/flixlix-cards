@@ -146,6 +146,7 @@
     "state_of_charge_unit_white_space": "Пробіл одиниці виміру заряду",
     "state_type": "Тип стану",
     "subtract_individual": "Віднімати індивідуальні значення",
+    "individual_share": "Розподіл за пристроями",
     "sum_total": "Сумувати сонячну та вторинну",
     "sum_total_individual": "Сумувати пристрій та вторинну",
     "tap_action": "Дія при натисканні",

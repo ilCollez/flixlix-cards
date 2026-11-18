@@ -351,6 +351,11 @@ function configOptions(
     make("state_of_charge_decimals", "Decimals for the SoC.", "battery"),
     make("color_state_of_charge_value", "Coloring of the SoC text.", "battery"),
     make("subtract_individual", "Subtract individual devices from home consumption.", "home"),
+    make(
+      "individual_share",
+      "Home ring without individual devices; devices get their own ring by source.",
+      "home"
+    ),
     make("override_state", "Use the home entity state directly.", "home"),
     make("state_type", "fossil_fuel_percentage state type, power or percentage.", "fossil-fuel"),
     make(

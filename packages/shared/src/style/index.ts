@@ -570,6 +570,10 @@ export const styles = css`
     pointer-events: none;
   }
 
+  .circle.ringed {
+    border-width: 0;
+  }
+
   .pointer-events-none {
     pointer-events: none;
   }

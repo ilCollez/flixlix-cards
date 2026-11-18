@@ -141,6 +141,11 @@ interface Home extends BaseConfigEntity {
   color_icon?: boolean | "solar" | "grid" | "battery";
   color_value?: boolean | "solar" | "grid" | "battery";
   subtract_individual?: boolean;
+  /**
+   * `home_first`: the home ring shows only the home's own loads, which take each source first,
+   * and each individual device gets a ring of what is left.
+   */
+  individual_share?: "home_first";
   secondary_info?: SecondaryInfoType;
   circle_animation?: boolean;
   hide?: boolean;

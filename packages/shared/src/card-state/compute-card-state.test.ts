@@ -515,6 +515,14 @@ describe("zero tolerance and display_zero", () => {
   });
 });
 
+const homeFirst = (individual_share?: "home_first") =>
+  config({
+    entities: {
+      home: { entity: "sensor.home", subtract_individual: true, individual_share },
+      individual: [{ entity: "sensor.car" }],
+    },
+  });
+
 describe("home ring", () => {
   test("bug #449: draws a full grid ring, without NaN segments, when nothing is consumed", () => {
     const { homeRing } = ready(compute({}));
@@ -554,6 +562,56 @@ describe("home ring", () => {
     );
 
     expect(homeRing.usageText).toBe(`180${thinSpace}W`);
+  });
+
+  describe("individual_share: home_first", () => {
+    /** 1.5 kW solar and 2.6 kW import feed 500 W of home loads and a car charging at 3.6 kW. */
+    const charging = readings({
+      grid: { fromGrid: 2600 },
+      solar: { total: 1500 },
+      individuals: [3600],
+    });
+
+    test("the home ring shows only the home's own loads, all solar when solar covers them", () => {
+      const { homeRing } = ready(compute({ config: homeFirst("home_first"), readings: charging }));
+
+      expect(homeRing.solar).toBeCloseTo(CIRCLE_CIRCUMFERENCE, 10);
+      expect(homeRing.grid).toBeCloseTo(0, 10);
+      expect(homeRing.largestSource).toBe("solar");
+      expect(homeRing.usageText).toBe(`500${thinSpace}W`);
+    });
+
+    test("the car's ring shows the solar left after the home and the grid for the rest", () => {
+      const state = ready(compute({ config: homeFirst("home_first"), readings: charging }));
+
+      expect(car(state)?.ring?.solar).toBeCloseTo(CIRCLE_CIRCUMFERENCE * (1000 / 3600), 10);
+      expect(car(state)?.ring?.grid).toBeCloseTo(CIRCLE_CIRCUMFERENCE * (2600 / 3600), 10);
+    });
+
+    test("without the option the rings stay as before", () => {
+      const state = ready(compute({ config: homeFirst(), readings: charging }));
+
+      expect(state.homeRing.solar).toBeCloseTo(CIRCLE_CIRCUMFERENCE * (1500 / 4100), 10);
+      expect(car(state)?.ring).toBeUndefined();
+    });
+
+    test("a device drawing nothing keeps its plain circle", () => {
+      const idle = readings({ grid: { fromGrid: 500 }, individuals: [0] });
+      const state = ready(
+        compute({
+          config: config({
+            entities: {
+              home: { entity: "sensor.home", individual_share: "home_first" },
+              individual: [{ entity: "sensor.car", display_zero: true }],
+            },
+          }),
+          readings: idle,
+        })
+      );
+
+      expect(car(state)?.has).toBe(true);
+      expect(car(state)?.ring).toBeUndefined();
+    });
   });
 });
 

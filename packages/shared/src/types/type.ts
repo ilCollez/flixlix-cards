@@ -259,6 +259,17 @@ export type NonFossilObject = ActionConfigSet & {
   };
 };
 
+/** Power or energy a node gets from each source; `nonFossil` is the low-carbon part of `grid`. */
+export type SourceShares = Readonly<{
+  solar: number;
+  battery: number;
+  grid: number;
+  nonFossil: number;
+}>;
+
+/** Arc lengths of each source's share of a node's circle; they sum to the circumference. */
+export type RingSegments = SourceShares;
+
 export type IndividualObject = {
   field: IndividualDeviceType | undefined;
   entity: string;
@@ -273,6 +284,8 @@ export type IndividualObject = {
   showDirection: boolean;
   /** The formatted state. */
   displayState: string;
+  /** Split by source with `home.individual_share`; undefined draws the device's plain circle. */
+  ring?: RingSegments;
   secondary: ActionConfigSet & {
     entity: string | undefined;
     icon: string | undefined;

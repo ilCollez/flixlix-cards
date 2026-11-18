@@ -146,6 +146,7 @@
     "state_of_charge_unit_white_space": "Leerzeichen",
     "state_type": "Typ des Zustands",
     "subtract_individual": "Individuell abziehen",
+    "individual_share": "Aufteilung Einzelgeräte",
     "sum_total": "Solar und Sekundär summieren",
     "sum_total_individual": "Gerät und Sekundär summieren",
     "tap_action": "Aktion beim Antippen",
